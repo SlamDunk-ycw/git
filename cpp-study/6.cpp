@@ -3,6 +3,11 @@
 #include<iostream>
 #include<string.h>
 using namespace std;
+typedef enum color{red=1,green=2}color;
+typedef union example
+{
+    int b1;char b2;
+}example;
 int main()
 {
     int* p1,*p2;
@@ -14,4 +19,7 @@ int main()
     delete p2;
     delete[] p3;
     p1=NULL;p2=NULL;p3=NULL;
+    color a=red;
+    example c;
+    c.b1=101;
 }
