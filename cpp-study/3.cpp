@@ -11,10 +11,12 @@ int add(int a,int b,int c=2)
 {
     return a+b+c;
 }
-double add(double a,double b)//函数重载
+//函数重载
+double add(double a,double b)
 {
     return a+b;
 }
+
 int main()
 {
     int a=1,b=1;
