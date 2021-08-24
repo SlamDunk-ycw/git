@@ -1,5 +1,4 @@
-//                               运算符重载                                   */
-/*
+/*                  运算符重载
 返回类型 operator 运算符符号（形式参数列表）
 {
     函数体
@@ -17,6 +16,20 @@
 函数的形式参数列表的个数不变
 3.注意：
 前置单目运算符参数只有一个，后置单目运算符在参数列表中要加个int，以区分
+4.对流插入和流提取运算符重载具有固定的格式
+ostream& operator<<(ostream& os，const 类类型&obj)流提取
+{
+    os<<.....
+    return os;
+}
+istream& operator>>(istream& is，const 类类型&obj)流插入
+{
+    is>>......
+    return is;
+}
+//不能作为成员函数
+5.类型转换运算符的重载
+比如对double的转换，注意不用指定返回类型，和类型运算符保持一致就行
 */
 #include<iostream>
 using namespace std;
@@ -24,7 +37,10 @@ class complex
 {
 public:
     complex(double a,double b);
-    complex();
+    complex()
+    {
+        cout<<"ok";
+    }
     void output()
     {
         cout<<real<<" "<<imag<<endl;
@@ -35,6 +51,8 @@ private:
     double real;
     double imag;
     friend complex operator+(const complex&a,const complex&b);
+    friend ostream& operator<<(ostream& os,const complex&obj);
+    friend istream& operator>>(istream& is,complex& obj);
 };
 complex::complex(double a,double b):real(a),imag(b)
 {
@@ -62,6 +80,17 @@ complex complex::operator++(int)
     real++;
     imag++;
     return result;
+}
+ostream& operator<<(ostream& os,const complex&obj)
+{
+    os<<"实部为："<<obj.real<<"虚部为："<<obj.imag;
+    return os;
+}
+istream& operator>>(istream& is,complex& obj)
+{
+    char ch1,ch2;
+    is>>obj.real>>ch1>>obj.imag>>ch2;
+    return is;
 }
 int main()
 {
